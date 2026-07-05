@@ -17,6 +17,10 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["Retry-After"],  # <-- FIX: without this, browsers can't
+                                      # read the Retry-After header on 429s,
+                                      # since it's not in the CORS-safelisted
+                                      # response header set.
 )
 
 # ---------------------------------------------------
